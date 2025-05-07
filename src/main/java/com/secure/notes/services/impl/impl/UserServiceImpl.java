@@ -8,10 +8,10 @@ import com.secure.notes.repositories.RoleRepository;
 import com.secure.notes.repositories.UserRepository;
 import com.secure.notes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,6 +45,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow();
         return convertToDto(user);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        Optional<User> user = userRepository.findByUserName(username);
+        return user.orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+    }
+
 
     private UserDTO convertToDto(User user) {
         return new UserDTO(

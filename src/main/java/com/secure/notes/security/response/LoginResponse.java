@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
+//this is essentially the DTO
 @Setter
 @Getter
 public class LoginResponse {
