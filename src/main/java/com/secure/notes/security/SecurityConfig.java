@@ -26,7 +26,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import java.time.LocalDate;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-//login request intercepted by the filter chain, then it goes to AuthFilter(creates the token) which passes it to AuthManager (responsibe for assembling AuthProvider-DaoAuthProv),
+//login request intercepted by the filter chain, then it goes to AuthFilter(creates the token) which passes it to AuthManager (responsible for assembling AuthProvider-DaoAuthProv),
 // DaoAuthProv calls the UserDetailsService(builds the User in the database or fetched, maps the User to UserDetails)
 @Configuration
 @EnableWebSecurity
@@ -47,6 +47,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, CustomLoggingFilter customLoggingFilter) throws Exception {
+        http.cors(withDefaults()); //added this line
         http.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .ignoringRequestMatchers("/api/auth/public/**"));
         //        http.csrf(AbstractHttpConfigurer::disable);
