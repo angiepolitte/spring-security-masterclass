@@ -1,4 +1,4 @@
-package com.secure.notes.services.impl.impl;
+package com.secure.notes.services.impl;
 
 import com.secure.notes.dtos.UserDTO;
 import com.secure.notes.models.AppRole;
